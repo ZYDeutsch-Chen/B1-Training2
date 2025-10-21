@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>德语B1观点讨论主题练习卡片</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px 0;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 5px;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        /* 快速导航 */
+        .quick-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin: 15px 0 20px;
+            padding: 0 5px;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .nav-btn {
+            padding: 8px 12px;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-size: 0.85rem;
+            flex: 1;
+            min-width: 100px;
+            max-width: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .nav-btn i {
+            font-size: 0.9em;
+        }
+        
+        .nav-btn.active {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            transform: scale(1.05);
+        }
+        
+        /* 卡片容器 */
+        .cards-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-top: 10px;
+            padding-bottom: 30px;
+            width: 100%;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .card {
+            width: 100%;
+            height: 400px;
+            perspective: 1000px;
+            cursor: pointer;
+            max-width: 900px;
+        }
+        
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 16px;
+        }
+        
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .card-front {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .card-back {
+            background: linear-gradient(145deg, #2c3e50, #34495e);
+            color: white;
+            transform: rotateY(180deg);
+            overflow-y: auto;
+            padding: 12px;
+        }
+        
+        .topic-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(52, 152, 219, 0.9);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .topic-number {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(231, 76, 60, 0.9);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .question-text {
+            font-size: 1.495rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            margin-top: 40px;
+        }
+        
+        .card-hint {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            font-style: italic;
+            margin-top: 15px;
+        }
+        
+        .translation-text {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #ecf0f1;
+            line-height: 1.4;
+            margin-top: 15px;
+        }
+        
+        .arguments-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 5px;
+        }
+        
+        .argument-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 8px;
+        }
+        
+        .argument-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #ecf0f1;
+        }
+        
+        .pro-title {
+            color: #2ecc71;
+        }
+        
+        .con-title {
+            color: #e74c3c;
+        }
+        
+        .argument-list {
+            font-size: 0.98rem;
+            line-height: 1.4;
+            color: #bdc3c7;
+            text-align: left;
+        }
+        
+        .argument-item {
+            margin-bottom: 4px;
+            text-align: left;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .pro-symbol {
+            color: #2ecc71;
+            font-weight: bold;
+            margin-right: 6px;
+            flex-shrink: 0;
+        }
+        
+        .con-symbol {
+            color: #e74c3c;
+            font-weight: bold;
+            margin-right: 6px;
+            flex-shrink: 0;
+        }
+        
+        .argument-text {
+            flex: 1;
+        }
+        
+        .argument-core {
+            font-weight: bold;
+            color: #ecf0f1;
+        }
+        
+        .argument-explanation {
+            font-weight: normal;
+            color: #bdc3c7;
+        }
+        
+        /* 底部信息 */
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+        
+        /* 加载状态 */
+        .loader {
+            text-align: center;
+            padding: 30px;
+            font-size: 1.2rem;
+            color: #7f8c8d;
+        }
+        
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            .card {
+                height: 550px;
+            }
+            
+            .card-back {
+                overflow-y: visible;
+                padding: 12px;
+            }
+            
+            .question-text {
+                font-size: 1.265rem;
+            }
+            
+            .translation-text {
+                font-size: 1.1rem;
+                margin-top: 30px;
+                margin-bottom: 8px;
+            }
+            
+            .argument-text {
+                font-size: 1.0rem;
+            }
+            
+            .arguments-container {
+                gap: 10px;
+                margin-top: 5px;
+            }
+            
+            .quick-nav {
+                max-width: 95%;
+            }
+            
+            .nav-btn {
+                min-width: 80px;
+                font-size: 0.75rem;
+                padding: 6px 10px;
+            }
+        }
+        
+        /* 超小屏幕优化 */
+        @media (max-width: 375px) {
+            .card {
+                height: 530px;
+            }
+            
+            .translation-text {
+                font-size: 1.05rem;
+                margin-top: 25px;
+            }
+            
+            .argument-text {
+                font-size: 0.95rem;
+            }
+            
+            .arguments-container {
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>德语B1观点讨论主题练习卡片</h1>
+        <p> - 观点表达与分析 | 点击卡片查看翻译和正反观点</p>
+    </div>
+    
+    <!-- 快速导航 -->
+    <div class="quick-nav">
+        <button class="nav-btn" data-category="health"><i class="fas fa-heartbeat"></i> 健康饮食</button>
+        <button class="nav-btn" data-category="education"><i class="fas fa-graduation-cap"></i> 教育学习</button>
+        <button class="nav-btn" data-category="environment"><i class="fas fa-leaf"></i> 环保交通</button>
+        <button class="nav-btn" data-category="technology"><i class="fas fa-laptop"></i> 科技网络</button>
+        <button class="nav-btn" data-category="lifestyle"><i class="fas fa-home"></i> 生活爱好</button>
+        <button class="nav-btn" data-category="work"><i class="fas fa-briefcase"></i> 工作职业</button>
+        <button class="nav-btn" data-category="social"><i class="fas fa-users"></i> 社会家庭</button>
+        <button class="nav-btn active" data-category="all"><i class="fas fa-star"></i> 全部主题</button>
+        <button class="nav-btn" data-category="random"><i class="fas fa-random"></i> 随机练习</button>
+    </div>
+    
+    <!-- 卡片容器 -->
+    <div class="cards-container" id="cards-container">
+        <div class="loader">
+            <i class="fas fa-spinner fa-spin"></i> 正在加载观点讨论卡片...
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>德语B1观点讨论练习卡片 | 观点表达与分析</p>
+        <p>总计: <span id="total-count">0</span>个主题 | 至元德语</p>
+    </div>
+    
+    <script>
+        // B1观点讨论主题数据
+        const topics = [
+            // 健康饮食类
+            {
+                id: "M2-1",
+                topic: "vegetarische Ernährung, gesund?",
+                translation: "素食主义，健康吗？",
+                category: "health",
+                germanCategory: "Gesundheit & Ernährung",
+                chineseCategory: "健康饮食",
+                proArguments: [
+                    "Gut für Umwelt: weniger CO₂; weniger Wasser und Futter für Tiere",
+                    "Tiere: kein Tierleid; Tiere leben besser",
+                    "Gesundheit: oft weniger Fett; viele gute Stoffe für die Verdauung; man isst bewusster"
+                ],
+                conArguments: [
+                    "Körper: Mensch ist ein Allesfresser; Körper braucht Nährstoffe aus Fleisch und Pflanzen",
+                    "Gesundheitsproblem: kann zu wenig Vitamin B12 und Eisen geben; schwierig, alle Nährstoffe zu bekommen",
+                    "Alltag: nicht überall gutes vegetarisches Essen; manchmal Probleme bei Feiern"
+                ]
+            },
+            {
+                id: "M2-2",
+                topic: "Essen bestellen oder selbst kochen?",
+                translation: "点外卖还是自己做饭？",
+                category: "health",
+                germanCategory: "Gesundheit & Ernährung",
+                chineseCategory: "健康饮食",
+                proArguments: [
+                    "Einfach und schnell: spart Zeit; kein Einkaufen und Abwasch",
+                    "Große Auswahl: Essen aus vielen Ländern; neue Gerichte probieren",
+                    "Besonders lecker: Essen von einem Koch; man kann sich entspannen"
+                ],
+                conArguments: [
+                    "Teuer: kostet mehr Geld; Extra-Kosten für Lieferung",
+                    "Ungesund: oft zu viel Fett, Salz und Zucker; man kennt die Zutaten nicht",
+                    "Umwelt: viel Verpackungs-Müll; Autos müssen liefern"
+                ]
+            },
+            {
+                id: "M2-3",
+                topic: "Sollen Schüler zu Hause oder in der Schule essen?",
+                translation: "学生应该在家还是在学校吃饭？",
+                category: "health",
+                germanCategory: "Gesundheit & Ernährung",
+                chineseCategory: "健康饮食",
+                proArguments: [
+                    "Mit Freunden: gemeinsames Essen; gut für die Gemeinschaft in der Klasse",
+                    "Spart Zeit: kurzer Weg; mehr Zeit für Hausaufgaben und Hobbys",
+                    "Gesundes Essen: warme und gute Mahlzeit; die Schule passt darauf auf"
+                ],
+                conArguments: [
+                    "Zuhause: Eltern kochen, was das Kind mag; Kontrolle über Frische und Qualität",
+                    "Atmosphäre: ruhig und entspannt zu Hause; Zeit für die Familie",
+                    "Wünsche: Kind kann selbst wählen, was es isst; muss nichts essen, was es nicht mag"
+                ]
+            },
+            {
+                id: "S2-5",
+                topic: "Sollten wir alle Vegetarier werden?",
+                translation: "我们都应该成为素食主义者吗？",
+                category: "health",
+                germanCategory: "Gesundheit & Ernährung",
+                chineseCategory: "健康饮食",
+                proArguments: [
+                    "Gut für Tiere: kein Tierleid und Sterben in Massentierhaltung",
+                    "Gut für Umwelt: weniger CO₂ und Wasserverbrauch für Tierfutter",
+                    "Gut für Gesundheit: oft weniger ungesunde Fette; mehr Ballaststoffe"
+                ],
+                conArguments: [
+                    "Natürliche Ernährung: Menschen sind von Natur aus Allesfresser",
+                    "Schwierige Umsetzung: nicht für jeden ist vegetarische Ernährung gesund (z.B. Kinder)",
+                    "Verzicht auf Tradition: viele traditionelle Gerichte enthalten Fleisch"
+                ]
+            },
+            
+            // 教育学习类
+            {
+                id: "M2-9",
+                topic: "Sind Schulnoten notwendig?",
+                translation: "学校成绩有必要吗？",
+                category: "education",
+                germanCategory: "Bildung & Lernen",
+                chineseCategory: "教育学习",
+                proArguments: [
+                    "Klare Information: Schüler und Eltern sehen den Leistungsstand",
+                    "Motivation: gibt Anreiz zum Lernen",
+                    "Wichtig für Zukunft: notwendig für Bewerbungen"
+                ],
+                conArguments: [
+                    "Angst: machen vielen Schülern Druck und Angst",
+                    "Falsches Bild: zeigen nicht, wie gut jemand in der Gruppe ist",
+                    "Kreativität: man denkt nur an die Note, nicht an neue Ideen"
+                ]
+            },
+            {
+                id: "M2-12",
+                topic: "Soll man mehrere Fremdsprachen lernen?",
+                translation: "应该学习多种外语吗？",
+                category: "education",
+                germanCategory: "Bildung & Lernen",
+                chineseCategory: "教育学习",
+                proArguments: [
+                    "Vorteil für Job: bessere Chancen in internationalen Firmen",
+                    "Reisen: man kann sich im Urlaub besser verständigen",
+                    "Training für Gehirn: hält den Kopf fit"
+                ],
+                conArguments: [
+                    "Braucht Zeit: man muss sehr viel lernen",
+                    "Schwer: kann Sprachen leicht verwechseln",
+                    "Nicht für alle: nicht jeder ist gut im Sprachenlernen"
+                ]
+            },
+            {
+                id: "M2-13",
+                topic: "Soll man ein Musikinstrument lernen?",
+                translation: "应该学习乐器吗？",
+                category: "education",
+                germanCategory: "Bildung & Lernen",
+                chineseCategory: "教育学习",
+                proArguments: [
+                    "Kreativität: man wird phantasievoller; lernt sich zu konzentrieren",
+                    "Gegen Stress: ein schönes Hobby zur Entspannung",
+                    "Gemeinschaft: macht Spaß in einer Band; man hat Erfolgserlebnisse"
+                ],
+                conArguments: [
+                    "Viel Übung: braucht Disziplin und regelmäßiges Training",
+                    "Teuer: Instrument und Unterricht kosten Geld",
+                    "Frust: kann enttäuschend sein, wenn es nicht klappt"
+                ]
+            },
+            {
+                id: "M2-27",
+                topic: "Sollen Schüler ein Praktikum machen?",
+                translation: "学生应该做实习吗？",
+                category: "education",
+                germanCategory: "Bildung & Lernen",
+                chineseCategory: "教育学习",
+                proArguments: [
+                    "Berufserfahrung: sieht, wie der Beruf wirklich ist",
+                    "Berufswahl: hilft bei der Entscheidung für einen Beruf",
+                    "Vorteil für Bewerbung: sieht gut im Lebenslauf aus"
+                ],
+                conArguments: [
+                    "Oft langweilige Aufgaben: z.B. nur Kopieren oder Kaffee kochen",
+                    "Mehr Stress: zusätzlich zur Schule",
+                    "Schwer zu finden: nicht jeder findet einen guten Praktikumsplatz"
+                ]
+            },
+            {
+                id: "M2-28",
+                topic: "nach dem Abitur Geld verdienen oder studieren?",
+                translation: "高中毕业后赚钱还是上大学？",
+                category: "education",
+                germanCategory: "Bildung & Lernen",
+                chineseCategory: "教育学习",
+                proArguments: [
+                    "Eigenes Geld: sofort finanziell unabhängig von den Eltern",
+                    "Praxiserfahrung: lernt das Arbeitsleben früh kennen",
+                    "Pause: eine Auszeit vom Lernen (\"Orientierungsjahr\")"
+                ],
+                conArguments: [
+                    "Bessere Jobs: bessere Chancen auf eine gute Karriere und Gehalt",
+                    "Interessen: kann Fächer studieren, die einen interessieren",
+                    "Persönlichkeit: entwickelt sich weiter; genießt das Studentenleben"
+                ]
+            },
+            {
+                id: "S2-3",
+                topic: "Sollen Kinder mehrere Fremdsprachen lernen?",
+                translation: "儿童应该学习多种外语吗？",
+                category: "education",
+                germanCategory: "Bildung & Lernen",
+                chineseCategory: "教育学习",
+                proArguments: [
+                    "Vorteil für die Zukunft: bessere Jobchancen in einer globalen Welt",
+                    "Bereicherung für Reisen: kann sich in vielen Ländern verständigen",
+                    "Training für das Gehirn: hält den Kopf fit und verbessert das Denken"
+                ],
+                conArguments: [
+                    "Überforderung: zu viel für Kinder; Stress in der Schule",
+                    "Wichtiger sind andere Fächer: z.B. Mathematik und Muttersprache(Chinesisch)",
+                    "Gefahr der Verwechslung: vermischt Sprachen und lernt keine richtig"
+                ]
+            },
+            
+            // 环保交通类
+            {
+                id: "M2-14",
+                topic: "mit dem Fahrrad zur Arbeit?",
+                translation: "骑自行车上班？",
+                category: "environment",
+                germanCategory: "Umwelt & Verkehr",
+                chineseCategory: "环保交通",
+                proArguments: [
+                    "Gesund: Bewegung an der frischen Luft",
+                    "Spart Geld: kein Benzin, kein Ticket für Bus/Bahn",
+                    "Gut für Umwelt: keine Abgase"
+                ],
+                conArguments: [
+                    "Wetter: unangenehm bei Regen, Schnee oder Kälte",
+                    "Anstrengend: besonders bei großer Hitze oder weiter Entfernung",
+                    "Gefahr: riskant im Straßenverkehr"
+                ]
+            },
+            {
+                id: "M2-15",
+                topic: "Auto oder öffentliche Verkehrsmittel?",
+                translation: "汽车还是公共交通工具？",
+                category: "environment",
+                germanCategory: "Umwelt & Verkehr",
+                chineseCategory: "环保交通",
+                proArguments: [
+                    "Flexibel: frei in der Wahl von Zeit und Route",
+                    "Bequem: trocken und warm bei schlechtem Wetter",
+                    "Schnell: oft direkter und zeitsparender"
+                ],
+                conArguments: [
+                    "Entspannend: kann lesen, Musik hören oder schlafen",
+                    "Schont Umwelt: weniger Abgase pro Person",
+                    "Günstiger: kein Auto kaufen, keine Versicherung, keine Steuer"
+                ]
+            },
+            {
+                id: "S2-4",
+                topic: "Soll das Parken in der Innenstadt verboten werden?",
+                translation: "应该禁止在市中心停车吗？",
+                category: "environment",
+                germanCategory: "Umwelt & Verkehr",
+                chineseCategory: "环保交通",
+                proArguments: [
+                    "Mehr Platz und Sicherheit: für Fußgänger und Fahrradfahrer",
+                    "Bessere Luft: weniger Abgase von Autos, die Parkplätze suchen",
+                    "Attraktivere Innenstadt: mehr Leben und Raum für Cafés und Geschäfte"
+                ],
+                conArguments: [
+                    "Schlecht für Geschäfte: Kunden können nicht mehr mit dem Auto einkaufen",
+                    "Unpraktisch für viele: z.B. für alte oder behinderte Menschen",
+                    "Problem mit Parkplätzen: Parkplätze außerhalb sind zu weit oder zu teuer"
+                ]
+            },
+            {
+                id: "S2-8",
+                topic: "Mehr tun für den Umweltschutz: Ist das unsere Pflicht?",
+                translation: "为环保做更多，是义务吗？",
+                category: "environment",
+                germanCategory: "Umwelt & Verkehr",
+                chineseCategory: "环保交通",
+                proArguments: [
+                    "Schutz für die Zukunft: muss die Erde für nächste Generationen erhalten",
+                    "Jeder kann helfen: kleine Dinge im Alltag machen einen Unterschied (Müll trennen, Rad fahren)",
+                    "Gemeinsame Verantwortung: wenn jeder etwas tut, ist der Effekt groß"
+                ],
+                conArguments: [
+                    "Hauptproblem sind Konzerne: Industrie und große Firmen verursachen die meiste Verschmutzung",
+                    "Zu teuer und unpraktisch: umweltfreundliche Produkte und Technologien sind oft teurer",
+                    "Falsches Gefühl: Einzelne werden beschuldigt, während die großen Verursacher frei sind"
+                ]
+            },
+            
+            // 科技网络类
+            {
+                id: "M2-18",
+                topic: "Sind soziale Netzwerke nützlich oder schädlich?",
+                translation: "社交网络有用还是有害？",
+                category: "technology",
+                germanCategory: "Technologie & Internet",
+                chineseCategory: "科技网络",
+                proArguments: [
+                    "Kontakte: leicht mit Freunden in der Ferne in Verbindung bleiben",
+                    "Schnelle Information: aktuelle Nachrichten und Trends",
+                    "Gemeinschaft: Gruppen für Hobbys und Interessen"
+                ],
+                conArguments: [
+                    "Sucht: verbringt zu viel Zeit am Handy/Computer",
+                    "Probleme: Datenschutz; Mobbing im Internet",
+                    "Falsche Nachrichten: viele unwahre Informationen (Fake News)"
+                ]
+            },
+            {
+                id: "M2-19",
+                topic: "Einkaufen im Internet oder im Geschäft?",
+                translation: "网上购物还是实体店购物？",
+                category: "technology",
+                germanCategory: "Technologie & Internet",
+                chineseCategory: "科技网络",
+                proArguments: [
+                    "Bequem: von zu Hause, zu jeder Zeit",
+                    "Oft günstiger: viele Preise und große Auswahl",
+                    "Einfach: Preise leicht vergleichen"
+                ],
+                conArguments: [
+                    "Persönliche Beratung: Verkäufer kann helfen und Produkt zeigen",
+                    "Sofort mitnehmen: Produkt sofort da; anfassen und anprobieren",
+                    "Kein Stress: keine Rücksendung; keine Lieferkosten"
+                ]
+            },
+            {
+                id: "M2-31",
+                topic: "Sind Computerkenntnisse wichtig für die berufliche Zukunft?",
+                translation: "计算机技能对职业未来重要吗？",
+                category: "technology",
+                germanCategory: "Technologie & Internet",
+                chineseCategory: "科技网络",
+                proArguments: [
+                    "Notwendig: in fast allen Jobs Grundwissen nötig",
+                    "Effizienter: Arbeit geht schneller und einfacher",
+                    "Flexibles Arbeiten: ermöglicht Homeoffice"
+                ],
+                conArguments: [
+                    "Nicht in allen Berufen: z.B. in vielen Handwerksberufen weniger wichtig",
+                    "Abhängigkeit: man ist zu abhängig von der Technik",
+                    "Soziale Fähigkeiten: Kommunikation mit Menschen wird vergessen"
+                ]
+            },
+            {
+                id: "S2-2",
+                topic: "Das Internet: Vorteile und Risiken",
+                translation: "互联网：优势与风险",
+                category: "technology",
+                germanCategory: "Technologie & Internet",
+                chineseCategory: "科技网络",
+                proArguments: [
+                    "Schnelle Information: findet alles sofort (Nachrichten, Wissen, Öffnungszeiten)",
+                    "Einfache Kommunikation: Kontakt mit Freunden und Familie weltweit (E-Mail, Video)",
+                    "Bequemes Einkaufen und Arbeiten: online bestellen, Bankgeschäfte, Homeoffice"
+                ],
+                conArguments: [
+                    "Gefahr für Daten: persönliche Informationen sind nicht sicher",
+                    "Zu viel Zeit am Bildschirm: wird schnell süchtig; vergisst die echte Welt",
+                    "Falsche Informationen: viele Lügen und falsche Nachrichten im Netz"
+                ]
+            },
+            {
+                id: "S2-6",
+                topic: "Bücher lesen auf dem Computer: Die Zukunft des Lesens?",
+                translation: "在电脑上读书：阅读的未来？",
+                category: "technology",
+                germanCategory: "Technologie & Internet",
+                chineseCategory: "科技网络",
+                proArguments: [
+                    "Sehr praktisch: kann tausende Bücher überall hin mitnehmen",
+                    "Oft günstiger: E-Books kosten oft weniger als gedruckte Bücher",
+                    "Angepasstes Lesen: kann Schriftgröße und Helligkeit ändern"
+                ],
+                conArguments: [
+                    "Besseres Lesegefühl: angenehmer für die Augen; kein Bildschirm",
+                    "Kein Akku: Buch geht nie aus; braucht keine Elektrizität",
+                    "Emotionale Verbindung: Geruch und Gefühl eines echten Buches; schöne Erinnerungen"
+                ]
+            },
+            
+            // 生活爱好类
+            {
+                id: "M2-4",
+                topic: "Sport im Verein?",
+                translation: "在俱乐部运动？",
+                category: "lifestyle",
+                germanCategory: "Lifestyle & Hobby",
+                chineseCategory: "生活爱好",
+                proArguments: [
+                    "Neue Freunde: trifft viele Menschen; man hilft sich in der Mannschaft",
+                    "Fester Plan: Training immer zur gleichen Zeit; Trainer zeigt, wie es geht",
+                    "Sicher und gut: lernt die richtige Technik; gute Plätze und Geräte sind da"
+                ],
+                conArguments: [
+                    "Wenig Freiheit: muss zum Training gehen; vielleicht Spiele am Wochenende",
+                    "Kostet Geld: muss jedes Jahr bezahlen; oft teure Kleidung",
+                    "Druck: muss gut für die Mannschaft sein; manchmal Stress mit anderen"
+                ]
+            },
+            {
+                id: "M2-10",
+                topic: "Sollte man mit 18 Jahren alleine wohnen?",
+                translation: "18岁时应该独自居住吗？",
+                category: "lifestyle",
+                germanCategory: "Lifestyle & Hobby",
+                chineseCategory: "生活爱好",
+                proArguments: [
+                    "Selbstständigkeit: lernt, sein Leben selbst zu organisieren",
+                    "Freiheit: mehr Privatsphäre; kann eigene Regeln machen",
+                    "Gute Vorbereitung: für das Leben als Erwachsener"
+                ],
+                conArguments: [
+                    "Hohe Kosten: Miete, Strom, Essen sind teuer",
+                    "Einsamkeit: kann alleine und isoliert sein",
+                    "Doppelbelastung: muss neben Studium/Ausbildung den Haushalt machen"
+                ]
+            },
+            {
+                id: "M2-11",
+                topic: "in der Stadt oder auf dem Land wohnen?",
+                translation: "住在城市还是农村？",
+                category: "lifestyle",
+                germanCategory: "Lifestyle & Hobby",
+                chineseCategory: "生活爱好",
+                proArguments: [
+                    "Viel Angebot: viele Jobs, Kino, Restaurants",
+                    "Gute Infrastruktur: Busse, Bahnen, viele Ärzte",
+                    "Kurze Wege: alles ist in der Nähe"
+                ],
+                conArguments: [
+                    "Natur und Ruhe: frische Luft; weniger Lärm",
+                    "Günstiger Wohnen: niedrigere Mieten; mehr Platz im Haus",
+                    "Bessere Umwelt: weniger Abgase; mehr Grün"
+                ]
+            },
+            {
+                id: "M2-16",
+                topic: "Urlaub mit der Familie oder mit Freunden?",
+                translation: "和家人还是和朋友度假？",
+                category: "lifestyle",
+                germanCategory: "Lifestyle & Hobby",
+                chineseCategory: "生活爱好",
+                proArguments: [
+                    "Gemeinsame Zeit: schöne Erinnerungen mit Eltern/Geschwistern",
+                    "Einfach für Eltern: Kinder sind beschäftigt und betreut",
+                    "Stärkt Familie: mehr Zusammenhalt"
+                ],
+                conArguments: [
+                    "Mehr Freiheit: kann spontan entscheiden, was man macht",
+                    "Gleiche Interessen: alle wollen das Gleiche sehen und machen",
+                    "Echte Erholung: keine Alltagspflichten wie Kochen"
+                ]
+            },
+            {
+                id: "M2-23",
+                topic: "Soll man Feste feiern? (Weihnachten, Neujahr …)",
+                translation: "应该庆祝节日吗？（圣诞节、新年等）",
+                category: "lifestyle",
+                germanCategory: "Lifestyle & Hobby",
+                chineseCategory: "生活爱好",
+                proArguments: [
+                    "Tradition: wichtig für Kultur und Gemeinschaftsgefühl",
+                    "Familie und Freunde: Zeit mit Liebsten verbringen",
+                    "Freude und Pause: Abwechslung vom Alltag; man entspannt sich"
+                ],
+                conArguments: [
+                    "Stress: viel Vorbereitung (Kochen, Dekorieren)",
+                    "Teuer: Geschenke und Essen kosten viel Geld",
+                    "Verpflichtung: muss teilnehmen, auch wenn man keine Lust hat"
+                ]
+            },
+            {
+                id: "S2-1",
+                topic: "Urlaub am Strand: Sinnvoll oder überbewertet?",
+                translation: "海滩度假：有意义还是被高估了？",
+                category: "lifestyle",
+                germanCategory: "Lifestyle & Hobby",
+                chineseCategory: "生活爱好",
+                proArguments: [
+                    "Vollkommene Entspannung: Sonne, Meer und Ruhe reduzieren Stress",
+                    "Einfache Planung: braucht keine komplizierte Reiseplanung; ideal für Familien mit Kindern",
+                    "Schöne Natur: frische Luft und schöne Landschaft sind gut für die Gesundheit"
+                ],
+                conArguments: [
+                    "Langweilig auf Dauer: wenig Abwechslung und Aktivitäten",
+                    "Oft sehr teuer: teure Hotels und Restaurants in Strandnähe",
+                    "Umweltprobleme: zu viele Touristen schaden der Natur"
+                ]
+            },
+            
+            // 工作职业类
+            {
+                id: "M2-5",
+                topic: "Sport mit Kollegen machen?",
+                translation: "和同事一起运动？",
+                category: "work",
+                germanCategory: "Arbeit & Beruf",
+                chineseCategory: "工作职业",
+                proArguments: [
+                    "Betriebsklima: bessere Stimmung bei der Arbeit; lockere Gespräche",
+                    "Flexibel: kein Vertrag; man macht Sport, wenn alle Zeit haben",
+                    "Mehr Spaß: zusammen ist es nicht so anstrengend; man motiviert sich"
+                ],
+                conArguments: [
+                    "Schwere Planung: nach der Arbeit ist man müde; nicht alle sind gleich fit",
+                    "Privatleben: sieht Kollegen auch in Freizeit; Ärger von der Arbeit kann bleiben",
+                    "Kein Trainer: niemand zeigt die richtige Technik; höheres Risiko für Verletzungen"
+                ]
+            },
+            {
+                id: "M2-29",
+                topic: "nach dem Abitur Studium oder Arbeit?",
+                translation: "高中毕业后上大学还是工作？",
+                category: "work",
+                germanCategory: "Arbeit & Beruf",
+                chineseCategory: "工作职业",
+                proArguments: [
+                    "Tiefes Wissen: lernt viel Theorie über ein Fach",
+                    "Abschluss: für viele Berufe notwendig (z.B. Arzt, Anwalt)",
+                    "Netzwerk: trifft viele Menschen für die berufliche Zukunft"
+                ],
+                conArguments: [
+                    "Schnell im Beruf: verdient früher sein eigenes Geld",
+                    "Keine Schulden: muss kein Studium bezahlen",
+                    "Praxis: lernt durch die Arbeit (\"learning by doing\")"
+                ]
+            },
+            {
+                id: "M2-30",
+                topic: "Sind Abschlussnoten von Hochschulen vorteilhaft für den Job?",
+                translation: "大学成绩对工作有利吗？",
+                category: "work",
+                germanCategory: "Arbeit & Beruf",
+                chineseCategory: "工作职业",
+                proArguments: [
+                    "Einfach für Firma: einfaches Auswahlkriterium für Bewerber",
+                    "Zeigt Fleiß: beweist, dass man hart arbeiten kann",
+                    "Wichtig für Konzerne: notwendig für Traineeprogramme"
+                ],
+                conArguments: [
+                    "Erfahrung ist wichtiger: praktische Kenntnisse zählen mehr",
+                    "Zeigt keine Soft Skills: Note sagt nichts über Teamarbeit aus",
+                    "Druck: erzeugt Stress und unfairen Wettbewerb"
+                ]
+            },
+            {
+                id: "M2-32",
+                topic: "Sind Großraumbüros für Angestellte sinnvoll?",
+                translation: "开放式办公室对员工有意义吗？",
+                category: "work",
+                germanCategory: "Arbeit & Beruf",
+                chineseCategory: "工作职业",
+                proArguments: [
+                    "Teamarbeit: einfache Kommunikation mit Kollegen",
+                    "Flexibel: leicht zu verändern; spart Platz",
+                    "Moderne Atmosphäre: wirkt offen und hell"
+                ],
+                conArguments: [
+                    "Laut und Ablenkung: man kann sich schlecht konzentrieren",
+                    "Keine Privatsphäre: alle hören und sehen alles",
+                    "Krankheiten: mehr Ansteckungsgefahr"
+                ]
+            },
+            {
+                id: "S2-7",
+                topic: "Sollte man an Feiertagen arbeiten?",
+                translation: "应该在节假日工作吗？",
+                category: "work",
+                germanCategory: "Arbeit & Beruf",
+                chineseCategory: "工作职业",
+                proArguments: [
+                    "Mehr Flexibilität: Menschen mit unregelmäßigen Arbeitszeiten können einkaufen",
+                    "Gut für Wirtschaft: Geschäfte verdienen mehr Geld",
+                    "Bequem für Touristen: können auch an Feiertagen einkaufen und essen gehen"
+                ],
+                conArguments: [
+                    "Wichtige Ruhezeit: alle Arbeitnehmer haben frei und können sich erholen",
+                    "Zeit für Familie und Freunde: gemeinsame Zeit an freien Tagen",
+                    "Tradition: Feiertage sind für Kultur und Gemeinschaft, nicht für Konsum"
+                ]
+            },
+            
+            // 社会家庭类
+            {
+                id: "M2-6",
+                topic: "Sollen Kinder im Haushalt mithelfen?",
+                translation: "儿童应该帮忙做家务吗？",
+                category: "social",
+                germanCategory: "Gesellschaft & Familie",
+                chineseCategory: "社会家庭",
+                proArguments: [
+                    "Lernt Verantwortung: wird selbstständig; hilft den Eltern",
+                    "Entlastung: Eltern haben weniger Arbeit",
+                    "Vorbereitung: wichtig für das spätere eigene Leben"
+                ],
+                conArguments: [
+                    "Stress: kann zu Streit in der Familie führen",
+                    "Wenig Zeit: weniger Zeit für Schule und Freunde",
+                    "Keine Lust: Aufgaben machen oft keinen Spaß"
+                ]
+            },
+            {
+                id: "M2-7",
+                topic: "Sollen Eltern die Kleidung für ihre Kinder bestimmen?",
+                translation: "父母应该决定孩子的衣服吗？",
+                category: "social",
+                germanCategory: "Gesellschaft & Familie",
+                chineseCategory: "社会家庭",
+                proArguments: [
+                    "Kontrolle: gute und preiswerte Kleidung; passt zum Wetter",
+                    "Praktisch: keine Diskussion über Markenkleidung"
+                ],
+                conArguments: [
+                    "Eigener Geschmack: Kind entwickelt eigene Meinung; wird selbstbewusster",
+                    "Weniger Streit: Kind ist zufrieden mit seiner Kleidung"
+                ]
+            },
+            {
+                id: "M2-8",
+                topic: "Sollten Kinder Haustiere haben?",
+                translation: "儿童应该有宠物吗？",
+                category: "social",
+                germanCategory: "Gesellschaft & Familie",
+                chineseCategory: "社会家庭",
+                proArguments: [
+                    "Lernt Verantwortung: muss sich um das Tier kümmern",
+                    "Ein Freund: das Tier ist ein guter Gefährte",
+                    "Bewegung: z.B. mit dem Hund Gassi gehen"
+                ],
+                conArguments: [
+                    "Viel Arbeit: oft machen die Eltern die Arbeit",
+                    "Kosten: Futter und Tierarzt kosten viel Geld",
+                    "Gesundheit: kann Allergien geben"
+                ]
+            },
+            {
+                id: "M2-24",
+                topic: "Soll das Rauchen in der Öffentlichkeit verboten werden?",
+                translation: "应该禁止在公共场所吸烟吗？",
+                category: "social",
+                germanCategory: "Gesellschaft & Familie",
+                chineseCategory: "社会家庭",
+                proArguments: [
+                    "Schutz: Nichtraucher atmen keinen schädlichen Rauch ein",
+                    "Vorbild: Kinder und Jugendliche rauchen seltener",
+                    "Sauberkeit: weniger Zigarettenstummel auf der Straße"
+                ],
+                conArguments: [
+                    "Wenig Freiheit: Raucher können nicht überall rauchen",
+                    "Nachteile für Gastronomie: z.B. für Kneipen und Restaurants",
+                    "Schwer zu kontrollieren: besonders auf der Straße oder in Parks"
+                ]
+            },
+            {
+                id: "M2-25",
+                topic: "Sollten Supermärkte 24 Stunden geöffnet haben?",
+                translation: "超市应该24小时营业吗？",
+                category: "social",
+                germanCategory: "Gesellschaft & Familie",
+                chineseCategory: "社会家庭",
+                proArguments: [
+                    "Flexibel: gut für Menschen, die spät arbeiten (Schichtarbeiter)",
+                    "Weniger Stress: z.B. kein Gedränge am Samstag",
+                    "Komfort: mehr Komfort für alle Kunden"
+                ],
+                conArguments: [
+                    "Hohe Kosten: mehr Personal und Energie nötig",
+                    "Schlecht für Angestellte: keine Ruhe am Abend; wenig Zeit für Familie",
+                    "Soziale Tradition: Abend und Sonntag sollte Zeit für Familie sein"
+                ]
+            },
+            {
+                id: "M2-26",
+                topic: "Haben Berufstätige Eltern Zeit für ihre Kinder?",
+                translation: "职业父母有时间陪伴孩子吗？",
+                category: "social",
+                germanCategory: "Gesellschaft & Familie",
+                chineseCategory: "社会家庭",
+                proArguments: [
+                    "Gute Planung: Zeit ist eine Frage der Organisation",
+                    "Qualität ist wichtig: kurze, intensive Zeit mit Kind ist wertvoll",
+                    "Wochenende: viel gemeinsame Zeit an freien Tagen und im Urlaub"
+                ],
+                conArguments: [
+                    "Viel Arbeit: zu müde und gestresst nach der Arbeit",
+                    "Wenig Geduld: keine Energie für die Kinder am Abend",
+                    "Kinder fühlen sich allein: vermissen ihre Eltern"
+                ]
+            },
+            {
+                id: "M2-33",
+                topic: "Pflegekraft zu Hause oder ins Altersheim?",
+                translation: "在家护理还是去养老院？",
+                category: "social",
+                germanCategory: "Gesellschaft & Familie",
+                chineseCategory: "社会家庭",
+                proArguments: [
+                    "Vertraut: in der gewohnten Umgebung; mehr Lebensfreude",
+                    "Selbstbestimmung: kann seinen eigenen Tagesplan machen",
+                    "Individuelle Betreuung: eine Kraft nur für eine Person"
+                ],
+                conArguments: [
+                    "Immer Hilfe: Betreuung 24 Stunden am Tag; mehr Sicherheit",
+                    "Soziale Kontakte: trifft andere ältere Menschen",
+                    "Entlastung für Familie: Angehörige haben keine Sorgen und Verpflichtungen"
+                ]
+            }
+        ];
+
+        // 渲染主题卡片
+        function renderTopicCards(category = 'all') {
+            const container = document.getElementById('cards-container');
+            container.innerHTML = '';
+            
+            // 根据类别过滤主题
+            let filteredTopics;
+            if (category === 'all') {
+                filteredTopics = [...topics];
+            } else if (category === 'random') {
+                // 随机选择5个主题
+                const shuffled = [...topics].sort(() => 0.5 - Math.random());
+                filteredTopics = shuffled.slice(0, 5);
+            } else {
+                filteredTopics = topics.filter(item => item.category === category);
+            }
+            
+            // 更新总数
+            document.getElementById('total-count').textContent = topics.length;
+            
+            if (filteredTopics.length === 0) {
+                container.innerHTML = `
+                    <div class="loader">
+                        <i class="fas fa-info-circle"></i> 该类别下没有主题
+                    </div>
+                `;
+                return;
+            }
+            
+            // 渲染每个主题卡片
+            filteredTopics.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                
+                // 创建正方观点HTML
+                const proArgumentsHtml = item.proArguments.map(arg => {
+                    const colonIndex = arg.indexOf('：');
+                    if (colonIndex > 0) {
+                        const core = arg.substring(0, colonIndex);
+                        const explanation = arg.substring(colonIndex);
+                        return `<div class="argument-item"><span class="pro-symbol">+</span><span class="argument-text"><span class="argument-core">${core}</span><span class="argument-explanation">${explanation}</span></span></div>`;
+                    } else {
+                        return `<div class="argument-item"><span class="pro-symbol">+</span><span class="argument-text"> ${arg}</span></div>`;
+                    }
+                }).join('');
+                
+                // 创建反方观点HTML
+                const conArgumentsHtml = item.conArguments.map(arg => {
+                    const colonIndex = arg.indexOf('：');
+                    if (colonIndex > 0) {
+                        const core = arg.substring(0, colonIndex);
+                        const explanation = arg.substring(colonIndex);
+                        return `<div class="argument-item"><span class="con-symbol">-</span><span class="argument-text"><span class="argument-core">${core}</span><span class="argument-explanation">${explanation}</span></span></div>`;
+                    } else {
+                        return `<div class="argument-item"><span class="con-symbol">-</span><span class="argument-text"> ${arg}</span></div>`;
+                    }
+                }).join('');
+                
+                card.innerHTML = `
+                    <div class="card-inner">
+                        <!-- 卡片正面 -->
+                        <div class="card-face card-front">
+                            <div class="topic-number">${item.id}</div>
+                            <div class="topic-tag">${item.germanCategory}</div>
+                            <div class="question-text">${item.topic}</div>
+                            <div class="card-hint">点击卡片查看翻译和正反观点</div>
+                        </div>
+                        
+                        <!-- 卡片背面 -->
+                        <div class="card-face card-back">
+                            <div class="topic-number">${item.id}</div>
+                            <div class="topic-tag">${item.chineseCategory}</div>
+                            <div class="translation-text">${item.translation}</div>
+                            
+                            <div class="arguments-container">
+                                <div class="argument-section">
+                                    <div class="argument-title pro-title">支持观点 (Pro)</div>
+                                    <div class="argument-list">
+                                        ${proArgumentsHtml}
+                                    </div>
+                                </div>
+                                
+                                <div class="argument-section">
+                                    <div class="argument-title con-title">反对观点 (Contra)</div>
+                                    <div class="argument-list">
+                                        ${conArgumentsHtml}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                `;
+                
+                // 添加点击事件
+                card.addEventListener('click', function() {
+                    this.classList.toggle('flipped');
+                });
+                
+                container.appendChild(card);
+            });
+        }
+        
+        // 类别导航按钮事件
+        document.querySelectorAll('.nav-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // 移除所有active类
+                document.querySelectorAll('.nav-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // 为当前按钮添加active类
+                this.classList.add('active');
+                
+                // 渲染对应类别的卡片
+                const category = this.dataset.category;
+                renderTopicCards(category);
+            });
+        });
+        
+        // 禁止右键和复制功能
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        
+        // 禁止文本选择
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        
+        // 禁止拖拽
+        document.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        
+        // 禁止快捷键复制
+        document.addEventListener('keydown', function(e) {
+            // 禁止 Ctrl+C, Ctrl+A, Ctrl+S, Ctrl+P, F12
+            if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 65 || e.keyCode === 83 || e.keyCode === 80)) {
+                e.preventDefault();
+                return false;
+            }
+            // 禁止 F12 开发者工具
+            if (e.keyCode === 123) {
+                e.preventDefault();
+                return false;
+            }
+        });
+        
+        // 添加版权保护提示
+        document.addEventListener('DOMContentLoaded', function() {
+            // 创建保护提示
+            const protectionNotice = document.createElement('div');
+            protectionNotice.style.cssText = `
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                background: rgba(231, 76, 60, 0.9);
+                color: white;
+                padding: 8px 12px;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                z-index: 9999;
+                opacity: 0.8;
+                transition: opacity 0.3s;
+            `;
+            protectionNotice.innerHTML = '<i class="fas fa-shield-alt"></i> 版权保护';
+            document.body.appendChild(protectionNotice);
+            
+            // 3秒后淡出
+            setTimeout(() => {
+                protectionNotice.style.opacity = '0';
+                setTimeout(() => {
+                    protectionNotice.remove();
+                }, 300);
+            }, 3000);
+        });
+        
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function() {
+            renderTopicCards('all');
+        });
+    </script>
+</body>
+</html>
